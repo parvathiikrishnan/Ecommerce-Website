@@ -7,6 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { TopnavComponent } from './topnav/topnav.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProductManagementComponent } from './product-management/product-management.component';
+import { HttpClientModule } from  '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { ProductManagementComponent } from './product-management/product-managem
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule, 
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
