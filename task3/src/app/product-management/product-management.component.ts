@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestAPIService } from '../request-api.service';
+import {Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -11,10 +12,19 @@ export class ProductManagementComponent implements OnInit {
 
   categories: any[] = [];
   products:any[] =[];
-  constructor(private RequestService: RequestAPIService) { }
+  isModalOpen=false;
+  userForm:FormGroup;
+  isEditing=false;
+  selectedID=null;
+
+  constructor(private RequestService: RequestAPIService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.loadCategories();
+    this.userForm = this.fb.group({
+      title: ['',Validators.required],
+      description: ['',Validators.required],
+    });
   }
 
   loadCategories(){
@@ -33,6 +43,36 @@ export class ProductManagementComponent implements OnInit {
     });
   }
 
+  showAddModal(){
+    this.isModalOpen=true;
+    this.isEditing=false;
+    this.selectedID=null;
+    this.userForm.reset();
+  }
+
+  showEditModal(data){
+    this.isModalOpen=true;
+    this.isEditing=true;
+    this.selectedID = data.id;
+    this.userForm.patchValue({
+      title: data.title,
+      description: data.description,
+    })
+  }
+
+  closeModal(){
+    this.isModalOpen=false;
+    this.userForm.reset();
+    this.selectedID=null;
+  }
+
+  editProduct(){
+
+  }
+
+  addProduct(){
+
+  }
   
 
 }

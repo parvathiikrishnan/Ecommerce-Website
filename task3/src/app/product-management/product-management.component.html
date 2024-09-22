@@ -3,7 +3,7 @@
 <p class="text-2xl text-center mb-10 "> Click on a category below to get started</p>
 
 <div class="flex justify-end px-3">
-    <button class="items-center px-6 py-2 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+    <button (click)="showAddModal()" class="items-center px-6 py-2 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
       Add
     </button>
   </div>
@@ -21,10 +21,60 @@
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{product.title}}</h5>
     </a>
     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{product.description}}</p>
-    <button class="inline-flex gap-4 items-center px-3 py-2 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+    <button (click)="showEditModal()" class="inline-flex gap-4 items-center px-3 py-2 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
     Edit
     </button>
     <button class="ml-6 inline-flex items-center px-3 py-2 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
         Delete
     </button>
 </div>
+
+<!-- Main modal -->
+<div *ngIf="isModalOpen" id="modal" tabindex="-1"  class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div class="relative p-4 w-full max-w-md max-h-full bg-white rounded-lg shadow dark:bg-gray-700">
+        <!-- Modal content -->
+        <div class="relative">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    {{isEditing ? "Edit User" : "Add User"}}
+                </h3>
+                <button (click)="closeModal()" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <form class="p-4" [formGroup]="userForm" (ngSubmit)="isEditing ? editProduct() : addProduct()">
+                <div class="grid gap-4 mb-4 grid-cols-2">
+                    <div class="col-span-2">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Title</label>
+                        <!-- <input formControlName="userName" type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"> -->
+                        
+                        <input formControlName="title" class="w-full px-3 py-2 border rounded" />
+                        <div *ngIf="userForm.get('title').invalid && userForm.get('title').touched" class="text-red-500">Title is required.</div>
+                    </div>
+                    
+                    <div class="col-span-2">
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+                        <input formControlName="description" id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+                        <div *ngIf="userForm.get('description').invalid && userForm.get('description').touched" class="text-red-500">Description is required.</div>
+                                        
+                    </div>
+                </div>
+  
+  
+                <div class="flex justify-center">
+                  <button [disabled]="userForm.invalid"  type="submit" class="text-white inline-flex items-center bg-blue-700 disabled:bg-blue-300 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path>
+                    </svg>
+                    {{isEditing ? "Edit User" : "Add User"}}
+                  </button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </div>
