@@ -1,6 +1,13 @@
 
 <h1 class="text-6xl text-center mt-10 mb-10 "> Welcome to the Nike Home Page</h1>
 <p class="text-2xl text-center mb-10 "> Click on a category below to get started</p>
+
+<div class="flex justify-end px-3">
+    <button class="items-center px-6 py-2 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
+      Add
+    </button>
+  </div>
+  
 <div class="ml-2 flex space-x-4">
     <ul *ngFor="let category of categories" class="flex flex-row text-sm font-medium text-left text-gray-500 border-r border-gray-200">
       <li class="mb-2">
@@ -9,19 +16,15 @@
     </ul>
   </div>
 
-  <!-- <div *ngFor="let product of products">
-    {{product.title}}
-  </div> -->
-
 <div *ngFor="let product of products" class="grid-cols-4 mt-4 p-6 bg-white border border-gray-200 rounded-lg shadow-xl">
     <a href="#">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{product.title}}</h5>
     </a>
     <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{product.description}}</p>
-    <button class="inline-flex gap-4 items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+    <button class="inline-flex gap-4 items-center px-3 py-2 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
     Edit
     </button>
-    <button class="ml-6 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+    <button class="ml-6 inline-flex items-center px-3 py-2 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
         Delete
     </button>
 </div>
