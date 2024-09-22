@@ -51,9 +51,11 @@ export class ProductManagementComponent implements OnInit {
   }
 
   showEditModal(data){
+    console.log(data)
     this.isModalOpen=true;
     this.isEditing=true;
     this.selectedID = data.id;
+    console.log("selected id", this.selectedID)
     this.userForm.patchValue({
       title: data.title,
       description: data.description,
@@ -67,12 +69,51 @@ export class ProductManagementComponent implements OnInit {
   }
 
   editProduct(){
+    if(this.selectedID && this.userForm.valid){
+      let params = {
+        title: this.userForm.value.title,
+        description: this.userForm.value.description
+      };
 
+      this.RequestService.updateProduct(this.selectedID,params).subscribe(
+        (response) => {
+          const index = this.products.findIndex(user => user.id === this.selectedID);
+          if (index !== -1) {
+            this.products[index] = { ...response }; // Update user in the list
+            this.userForm.reset(); // Reset the form
+            this.selectedID = null;
+            this.isModalOpen=false
+          }
+        },
+        (error) => {
+          console.error('Error updating user', error);
+        }
+      );
+
+    }
   }
 
   addProduct(){
+    if(this.userForm.valid){
+      let params = {
+        title: this.userForm.value.title,
+        description: this.userForm.value.description
+      }
 
+      this.RequestService.createProduct(params).subscribe(response => {
+        this.products.push(response)
+        console.log(response);
+      });
+
+      error => {
+        // Error callback
+        console.error('Error creating product:', error)
+        alert('An error occurred while creating the product. Please try again.');
+      }
+      this.isModalOpen=false
+    }
   }
   
+
 
 }

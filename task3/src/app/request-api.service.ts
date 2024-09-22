@@ -17,4 +17,12 @@ export class RequestAPIService {
     return this.http.get<any>(`${this.apiurl}/products/category/${category}`);
   }
 
+  createProduct(data):Observable<any>{
+    return this.http.post<any>(`${this.apiurl}/products`,data);
+  }
+
+  updateProduct(id: number, user: any): Observable<any> {
+    return this.http.put<any>(`${this.apiurl}/products/${id}`, user);
+  }
+
 }
