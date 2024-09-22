@@ -10,6 +10,7 @@ import { RequestAPIService } from '../request-api.service';
 export class ProductManagementComponent implements OnInit {
 
   categories: any[] = [];
+  products:any[] =[];
   constructor(private RequestService: RequestAPIService) { }
 
   ngOnInit(): void {
@@ -23,5 +24,15 @@ export class ProductManagementComponent implements OnInit {
       console.log("categories" , this.categories)
     });
   }
+
+  showProducts(category){
+    console.log(category)
+    this.RequestService.getProducts(category).subscribe(res => {
+      this.products=res;
+      console.log("products" , this.products)
+    });
+  }
+
+  
 
 }

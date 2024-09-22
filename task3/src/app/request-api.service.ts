@@ -12,4 +12,9 @@ export class RequestAPIService {
   getCategories():Observable<any>{
     return this.http.get<any>(`${this.apiurl}/products/categories`);
   }
+
+  getProducts(category):Observable<any>{
+    return this.http.get<any>(`${this.apiurl}/products/category/${category}`);
+  }
+
 }
