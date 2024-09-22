@@ -25,4 +25,7 @@ export class RequestAPIService {
     return this.http.put<any>(`${this.apiurl}/products/${id}`, user);
   }
 
+  deleteProduct(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiurl}/products/${id}`);
+  }
 }

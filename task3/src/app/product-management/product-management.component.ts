@@ -113,6 +113,15 @@ export class ProductManagementComponent implements OnInit {
       this.isModalOpen=false
     }
   }
+
+  deleteProduct(id){
+    console.log(id);
+    this.RequestService.deleteProduct(id).subscribe(response => {
+      // Filter out the user with the matching userID
+      this.products = this.products.filter(user => user.id !== id);
+      console.log('User deleted:', response);
+    });
+  }
   
 
 
