@@ -24,6 +24,8 @@ export class ProductManagementComponent implements OnInit {
     this.userForm = this.fb.group({
       title: ['',Validators.required],
       description: ['',Validators.required],
+      price: ['', Validators.required],
+      category: ['', Validators.required]
     });
   }
 
@@ -59,6 +61,8 @@ export class ProductManagementComponent implements OnInit {
     this.userForm.patchValue({
       title: data.title,
       description: data.description,
+      price: data.price,
+      category: data.category
     })
   }
 
@@ -72,7 +76,9 @@ export class ProductManagementComponent implements OnInit {
     if(this.selectedID && this.userForm.valid){
       let params = {
         title: this.userForm.value.title,
-        description: this.userForm.value.description
+        description: this.userForm.value.description,
+        price: this.userForm.value.price,
+        category: this.userForm.value.category
       };
 
       this.RequestService.updateProduct(this.selectedID,params).subscribe(
@@ -97,7 +103,9 @@ export class ProductManagementComponent implements OnInit {
     if(this.userForm.valid){
       let params = {
         title: this.userForm.value.title,
-        description: this.userForm.value.description
+        description: this.userForm.value.description,
+        price: this.userForm.value.price,
+        category: this.userForm.value.category
       }
 
       this.RequestService.createProduct(params).subscribe(response => {
