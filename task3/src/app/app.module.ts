@@ -8,6 +8,7 @@ import { TopnavComponent } from './topnav/topnav.component';
 import { FooterComponent } from './footer/footer.component';
 import { ProductManagementComponent } from './product-management/product-management.component';
 import { HttpClientModule } from  '@angular/common/http';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { HttpClientModule } from  '@angular/common/http';
     LoginComponent,
     TopnavComponent,
     FooterComponent,
-    ProductManagementComponent
+    ProductManagementComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
