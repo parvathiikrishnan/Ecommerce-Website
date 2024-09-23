@@ -19,7 +19,7 @@ export class ProductManagementComponent implements OnInit {
   selectedID=null;
   deletedID=null;
   first_category;
-  
+ 
 
   constructor(private RequestService: RequestAPIService, private fb: FormBuilder) { }
 
@@ -44,6 +44,22 @@ export class ProductManagementComponent implements OnInit {
         console.log("products" , this.products)
       });
     });
+  }
+
+   
+  isInvalid(){
+    if(this.userForm.invalid){
+      console.log("Invalid")
+      console.log("title" , this.userForm.value.title)
+      console.log("desc" , this.userForm.value.description)
+      console.log("price" , this.userForm.value.price)
+      console.log("category" , this.userForm.value.category)
+      console.log("UserFORM" , this.userForm)
+      return true
+    }
+    else{
+      return false
+    }
   }
 
   showProducts(category){
@@ -71,7 +87,8 @@ export class ProductManagementComponent implements OnInit {
       title: data.title,
       description: data.description,
       price: data.price,
-      category: data.category
+      category: data.category,
+      image: data.image
     })
   }
 
@@ -95,7 +112,8 @@ export class ProductManagementComponent implements OnInit {
         title: this.userForm.value.title,
         description: this.userForm.value.description,
         price: this.userForm.value.price,
-        category: this.userForm.value.category
+        category: this.userForm.value.category,
+        
       };
 
       this.RequestService.updateProduct(this.selectedID,params).subscribe(
@@ -117,12 +135,15 @@ export class ProductManagementComponent implements OnInit {
   }
 
   addProduct(){
+    console.log("HERE")
     if(this.userForm.valid){
+      console.log("validated")
       let params = {
         title: this.userForm.value.title,
         description: this.userForm.value.description,
         price: this.userForm.value.price,
-        category: this.userForm.value.category
+        category: this.userForm.value.category,
+        
       }
 
       this.RequestService.createProduct(params).subscribe(response => {
@@ -131,7 +152,6 @@ export class ProductManagementComponent implements OnInit {
       });
 
       error => {
-        // Error callback
         console.error('Error creating product:', error)
         alert('An error occurred while creating the product. Please try again.');
       }
@@ -151,6 +171,20 @@ export class ProductManagementComponent implements OnInit {
 
   cancelDelete(){
     this.isModalOpenDelete = false;
+  }
+
+  //Converting to string from base64 to render image
+  onFileChange(event: any) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+  
+    reader.onloadend = () => {
+      const base64String = reader.result as string;
+      this.userForm.patchValue({ image: base64String }); //assigning the imgSrc to the converted value
+    };
+  
+    // Start reading the file
+    reader.readAsDataURL(file);
   }
 
 }
