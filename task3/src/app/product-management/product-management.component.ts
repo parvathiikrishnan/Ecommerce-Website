@@ -16,15 +16,11 @@ export class ProductManagementComponent implements OnInit {
   userForm:FormGroup;
   isEditing=false;
   selectedID=null;
-
+  first_category;
   constructor(private RequestService: RequestAPIService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.loadCategories();
-    this.RequestService.getProducts("electronics").subscribe(res => {
-      this.products=res;
-      console.log("products" , this.products)
-    });
     this.userForm = this.fb.group({
       title: ['',Validators.required],
       description: ['',Validators.required],
@@ -36,9 +32,13 @@ export class ProductManagementComponent implements OnInit {
 
   loadCategories(){
     this.RequestService.getCategories().subscribe(res => {
-      console.log("response" , res)
       this.categories = res;
-      console.log("categories" , this.categories)
+      this.first_category = this.categories[0]
+      //getting the first category details loaded on the website
+      this.RequestService.getProducts(this.first_category).subscribe(res => {
+        this.products=res;
+        console.log("products" , this.products)
+      });
     });
   }
 
