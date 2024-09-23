@@ -21,11 +21,16 @@ export class ProductManagementComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCategories();
+    this.RequestService.getProducts("electronics").subscribe(res => {
+      this.products=res;
+      console.log("products" , this.products)
+    });
     this.userForm = this.fb.group({
       title: ['',Validators.required],
       description: ['',Validators.required],
       price: ['', Validators.required],
-      category: ['', Validators.required]
+      category: ['', Validators.required],
+      image: ['', Validators.required]
     });
   }
 
@@ -130,7 +135,6 @@ export class ProductManagementComponent implements OnInit {
       console.log('User deleted:', response);
     });
   }
-  
 
 
 }
