@@ -139,11 +139,9 @@ export class ProductManagementComponent implements OnInit {
     }
   }
 
-  
-
   confirmDelete(){
     console.log("Here", this.deletedID)
-
+    this.isModalOpenDelete=false;
     this.RequestService.deleteProduct(this.deletedID).subscribe(response => {
       // Filter out the user with the matching userID
       this.products = this.products.filter(user => user.id !== this.deletedID);
@@ -151,5 +149,8 @@ export class ProductManagementComponent implements OnInit {
     });
   }
 
+  cancelDelete(){
+    this.isModalOpenDelete = false;
+  }
 
 }
