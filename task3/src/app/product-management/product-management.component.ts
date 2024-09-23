@@ -13,10 +13,14 @@ export class ProductManagementComponent implements OnInit {
   categories: any[] = [];
   products:any[] =[];
   isModalOpen=false;
+  isModalOpenDelete=false
   userForm:FormGroup;
   isEditing=false;
   selectedID=null;
+  deletedID=null;
   first_category;
+  
+
   constructor(private RequestService: RequestAPIService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -69,6 +73,14 @@ export class ProductManagementComponent implements OnInit {
       price: data.price,
       category: data.category
     })
+  }
+
+  ShowDeleteModal(id){
+    // console.log(id);
+    console.log("trying to show the delete modal")
+    this.isModalOpenDelete = true;
+    this.deletedID = id;
+    // this.confirmDelete(id);
   }
 
   closeModal(){
@@ -127,11 +139,14 @@ export class ProductManagementComponent implements OnInit {
     }
   }
 
-  deleteProduct(id){
-    console.log(id);
-    this.RequestService.deleteProduct(id).subscribe(response => {
+  
+
+  confirmDelete(){
+    console.log("Here", this.deletedID)
+
+    this.RequestService.deleteProduct(this.deletedID).subscribe(response => {
       // Filter out the user with the matching userID
-      this.products = this.products.filter(user => user.id !== id);
+      this.products = this.products.filter(user => user.id !== this.deletedID);
       console.log('User deleted:', response);
     });
   }
