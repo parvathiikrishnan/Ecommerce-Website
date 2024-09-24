@@ -21,7 +21,7 @@
     <p class="text-gray-700 text-lg ml-3">Loading...</p>
   </div>
 
-  <!-- Pagination Controls 
+  <!-- Pagination Controls  -->
 <div class="flex justify-center space-x-2 mt-4">
   <button (click)="previousPage()" 
           [disabled]="currentPage === 1" 
@@ -35,9 +35,9 @@
     Next
   </button>
 </div>
--->
+
   <div *ngIf="!loading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
-    <div *ngFor="let product of products" class="bg-white border border-gray-200 rounded-lg shadow-xl p-6 flex flex-col justify-between">
+    <div *ngFor="let product of paginatedProducts" class="bg-white border border-gray-200 rounded-lg shadow-xl p-6 flex flex-col justify-between">
       <!-- Product Image (fixed height) -->
       <img class="h-48 w-full object-contain rounded-lg mb-4" src="{{product.image}}" alt="{{product.title}}">
       

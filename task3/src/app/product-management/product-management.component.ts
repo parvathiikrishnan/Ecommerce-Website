@@ -24,7 +24,7 @@ export class ProductManagementComponent implements OnInit {
   paginatedProducts: any[] = [];
   totalPages: number = 1;
   currentPage: number = 1;
-  productsPerPage: number = 5;
+  productsPerPage: number = 4;
   maxImageSize = 60000;
   toobig=false;
 
@@ -80,28 +80,34 @@ export class ProductManagementComponent implements OnInit {
       this.loading = false; });
   }
 
-  updatePagination(){
+  updatePagination() {
     this.totalPages = Math.ceil(this.products.length / this.productsPerPage);
     this.paginatedProducts = this.products.slice(
-      (this.currentPage - 1) * this.productsPerPage,
-      this.currentPage * this.productsPerPage
+        (this.currentPage - 1) * this.productsPerPage,
+        this.currentPage * this.productsPerPage
     );
-  }
+    console.log(`Current Page: ${this.currentPage}, Total Pages: ${this.totalPages}`);
+    console.log('Paginated Products:', this.paginatedProducts);
+    
+}
 
   nextPage() {
-    if (this.currentPage < this.totalPages) {
-      this.currentPage++;
-      this.updatePagination();
-    }
+      if (this.currentPage < this.totalPages) {
+          this.currentPage++;
+          this.updatePagination();
+      }
   }
-
 
   previousPage() {
-    if (this.currentPage > 1) {
-      this.currentPage--;
-      this.updatePagination();
-    }
+      if (this.currentPage > 1) {
+          this.currentPage--;
+          this.updatePagination();
+      }
   }
+
+
+
+
   //Showing the Add modal 
   showAddModal(){
     this.isModalOpen=true;
@@ -221,8 +227,13 @@ export class ProductManagementComponent implements OnInit {
       // Start reading the file
       reader.readAsDataURL(file);
     }
+
+    else{
+      this.userForm.get('image').reset();
+    }
   }
 
+  //checks the size of the file and gives error for large files
   fileSizeChecker(file){
     if(file.size < this.maxImageSize){
       this.toobig=false
@@ -233,14 +244,16 @@ export class ProductManagementComponent implements OnInit {
     else{
       this.toobig=true
       console.log("Invalid size")
+      
+      console.log(this.userForm.value.image)
       Swal.fire({
-        title: 'Error!',
+        tietle: 'Error!',
         text: 'Image size is too big',
         icon: 'error',
         confirmButtonText: 'Try again'
-      })
+      }) 
 
-      this.userForm.reset();
+
     }
   }
  
