@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'; // Import Router
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { RequestAPIService } from '../request-api.service';
-import Swal from 'sweetalert2/dist/sweetalert2.js'
+import Swal from 'sweetalert2/dist/sweetalert2.js' //do npm install first and include cdn in index.html
 
 @Component({
   selector: 'app-login',
@@ -54,21 +54,6 @@ export class LoginComponent implements OnInit {
       );
 
       }
-      
-
-     
-    // });
-
-    // if(this.username == "admin" && this.password == "password"){
-    //   console.log("Logged in")
-    //   this.router.navigate(['product']);
-    // }
-
-    // else{
-    //   console.log("Email", this.username)
-    //   console.log("Password", this.password)
-    //   console.log("invalid credentials")
-    // }
   }
 
 }
