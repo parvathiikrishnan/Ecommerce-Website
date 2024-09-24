@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         },
         (error) => {
           console.error('Error logging in:', error)
-          // alert('Username and password are invalid. Please try again.');
+          
           Swal.fire({
             title: 'Error!',
             text: 'Username and password are invalid. Please try again.',
