@@ -20,6 +20,7 @@ export class ProductManagementComponent implements OnInit {
   selectedID=null;
   deletedID=null;
   first_category;
+  loading = false;
  
   //Constructor uses Request Service and Form Builder
   constructor(private RequestService: RequestAPIService, private fb: FormBuilder) { }
@@ -38,6 +39,7 @@ export class ProductManagementComponent implements OnInit {
 
   //Showing the categories as well as electronics
   loadCategories(){
+    this.loading = true;
     this.RequestService.getCategories().subscribe(res => {
       this.categories = res;
       this.first_category = this.categories[0]
@@ -45,6 +47,7 @@ export class ProductManagementComponent implements OnInit {
       this.RequestService.getProducts(this.first_category).subscribe(res => {
         this.products=res;
         console.log("products" , this.products)
+        this.loading=false;
       });
     });
   }
@@ -61,11 +64,16 @@ export class ProductManagementComponent implements OnInit {
 
   //Showing the available categories
   showProducts(category){
+    this.loading=true;
     console.log(category)
     this.RequestService.getProducts(category).subscribe(res => {
       this.products=res;
       console.log("products" , this.products)
-    });
+      this.loading=false;
+    },
+    err => {
+      console.error(err);
+      this.loading = false; });
   }
 
   //Showing the Add modal 
