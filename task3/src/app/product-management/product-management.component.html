@@ -21,20 +21,7 @@
     <p class="text-gray-700 text-lg ml-3">Loading...</p>
   </div>
 
-  <!-- Pagination Controls  -->
-<div class="flex justify-center space-x-2 mt-4">
-  <button (click)="previousPage()" 
-          [disabled]="currentPage === 1" 
-          class="px-3 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 disabled:opacity-50">
-    Previous
-  </button>
-  <span class="px-4 py-2">{{ currentPage }} / {{ totalPages }}</span>
-  <button (click)="nextPage()" 
-          [disabled]="currentPage === totalPages" 
-          class="px-3 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 disabled:opacity-50">
-    Next
-  </button>
-</div>
+
 
   <div *ngIf="!loading" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
     <div *ngFor="let product of paginatedProducts" class="bg-white border border-gray-200 rounded-lg shadow-xl p-6 flex flex-col justify-between">
@@ -64,6 +51,21 @@
     </div>
   </div>
   
+    <!-- Pagination Controls  -->
+<div class="flex justify-center space-x-2 mt-4">
+  <button (click)="previousPage()" 
+          [disabled]="currentPage === 1" 
+          class="px-3 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 disabled:opacity-50">
+    Previous
+  </button>
+  <span class="px-4 py-2">{{ currentPage }} / {{ totalPages }}</span>
+  <button (click)="nextPage()" 
+          [disabled]="currentPage === totalPages" 
+          class="px-3 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 disabled:opacity-50">
+    Next
+  </button>
+</div>
+
 <!-- Main modal -->
 <div *ngIf="isModalOpen" id="modal" tabindex="-1"  class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
     <div class="relative p-4 w-full max-w-md max-h-full bg-white rounded-lg shadow ">
