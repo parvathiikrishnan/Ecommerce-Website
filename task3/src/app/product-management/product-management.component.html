@@ -117,11 +117,8 @@
                         id="category" 
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                         required>
-                        <option value=" " disabled selected>Select a category</option> <!-- Placeholder option -->
+                        <option >Select a category</option> <!-- Placeholder option -->
                         <option  *ngFor="let category of categories">{{category}}</option>
-                
-                        
-                        <!-- Add more options as needed -->
                     </select>
                     
                     <div *ngIf="userForm.get('category').invalid && userForm.get('category').touched" class="text-red-500">
