@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestAPIService } from '../request-api.service';
-import {Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -21,7 +21,11 @@ export class ProductManagementComponent implements OnInit {
   deletedID=null;
   first_category;
   loading = false;
- 
+  paginatedProducts: any[] = [];
+  totalPages: number = 1;
+  currentPage: number = 1;
+  productsPerPage: number = 5;
+
   //Constructor uses Request Service and Form Builder
   constructor(private RequestService: RequestAPIService, private fb: FormBuilder) { }
 
@@ -43,12 +47,7 @@ export class ProductManagementComponent implements OnInit {
     this.RequestService.getCategories().subscribe(res => {
       this.categories = res;
       this.first_category = this.categories[0]
-      //getting the first category details loaded on the website
-      this.RequestService.getProducts(this.first_category).subscribe(res => {
-        this.products=res;
-        console.log("products" , this.products)
-        this.loading=false;
-      });
+      this.showProducts(this.first_category) //do not make the API call again
     });
   }
 
@@ -64,11 +63,14 @@ export class ProductManagementComponent implements OnInit {
 
   //Showing the available categories
   showProducts(category){
+    this.currentPage= 1;
+    
     this.loading=true;
     console.log(category)
     this.RequestService.getProducts(category).subscribe(res => {
       this.products=res;
       console.log("products" , this.products)
+      this.updatePagination();
       this.loading=false;
     },
     err => {
@@ -76,6 +78,28 @@ export class ProductManagementComponent implements OnInit {
       this.loading = false; });
   }
 
+  updatePagination(){
+    this.totalPages = Math.ceil(this.products.length / this.productsPerPage);
+    this.paginatedProducts = this.products.slice(
+      (this.currentPage - 1) * this.productsPerPage,
+      this.currentPage * this.productsPerPage
+    );
+  }
+
+  nextPage() {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.updatePagination();
+    }
+  }
+
+
+  previousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePagination();
+    }
+  }
   //Showing the Add modal 
   showAddModal(){
     this.isModalOpen=true;
@@ -201,10 +225,15 @@ export class ProductManagementComponent implements OnInit {
     // Start reading the file
     reader.readAsDataURL(file);
     }
-    else if(file && file.size > maxSizeInBytes){
-      console.log(`File size is too large`)
-      event.target.value ='';
+
+    error => {
+      console.error('Image error', error)
+      alert('An error occurred while creating the product. Please try again.');
     }
+    // else if(file && file.size > maxSizeInBytes){
+    //   console.log(`File size is too large`)
+    //   event.target.value ='';
+    // }
 
 
   }

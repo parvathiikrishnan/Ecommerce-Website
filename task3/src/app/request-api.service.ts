@@ -9,6 +9,14 @@ export class RequestAPIService {
   private apiurl = "https://fakestoreapi.com";
   constructor(private http: HttpClient) { }
 
+  getUsers():Observable<any>{
+    return this.http.get<any>(`${this.apiurl}/users`)
+  }
+
+  createToken(data):Observable<any>{
+    return this.http.post<any>(`${this.apiurl}/auth/login`, data);
+  }
+
   getCategories():Observable<any>{
     return this.http.get<any>(`${this.apiurl}/products/categories`);
   }
