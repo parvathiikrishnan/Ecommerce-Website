@@ -26,6 +26,7 @@ export class ProductManagementComponent implements OnInit {
   currentPage: number = 1;
   productsPerPage: number = 5;
   maxImageSize = 60000;
+  toobig=false;
 
   //Constructor uses Request Service and Form Builder
   constructor(private RequestService: RequestAPIService, private fb: FormBuilder) { }
@@ -38,7 +39,7 @@ export class ProductManagementComponent implements OnInit {
       description: ['',Validators.required],
       price: ['', Validators.required],
       category: ['', Validators.required],
-      image: ['']
+      image: ['',Validators.required]
     });
   }
 
@@ -210,7 +211,8 @@ export class ProductManagementComponent implements OnInit {
   onFileChange(event: any) {
     const file = event.target.files[0];
     const reader = new FileReader();
-    if(this.fileSizeChecker){
+    if(this.fileSizeChecker(file)){
+      console.log("Valid size")
       reader.onloadend = () => {
         const base64String = reader.result as string;
         this.userForm.patchValue({ image: base64String }); //assigning the imgSrc to the converted value
@@ -223,15 +225,22 @@ export class ProductManagementComponent implements OnInit {
 
   fileSizeChecker(file){
     if(file.size < this.maxImageSize){
+      this.toobig=false
+      console.log(file.size)
+      console.log("Checking and it is valid")
       return true;
     }
     else{
+      this.toobig=true
+      console.log("Invalid size")
       Swal.fire({
         title: 'Error!',
         text: 'Image size is too big',
         icon: 'error',
         confirmButtonText: 'Try again'
       })
+
+      this.userForm.reset();
     }
   }
  
