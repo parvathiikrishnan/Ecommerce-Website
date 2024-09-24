@@ -86,14 +86,18 @@
                     </div>
 
                     <div class="col-span-2">
-                        <label class="block mb-2 text-sm font-medium text-gray-900">Price</label>
+                        <label class="block mb-2 text-sm font-medium text-gray-900">Category</label>
                         <input formControlName="category" id="category" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500">
                         <div *ngIf="userForm.get('category').invalid && userForm.get('category').touched" class="text-red-500">Category is required.</div>                  
                     </div>
 
-                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload Image</label>
-                  <input type="file" (change)="onFileChange($event)" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
-
+                    <div class="col-span-2">
+                      <label for="image" class="block mb-2 text-sm font-medium text-gray-900">Upload Image</label>
+                      <input type="file" (change)="onFileChange($event)" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
+                      <!-- <div *ngIf="userForm.get('image').value" class="mt-2">
+                        <img [src]="userForm.get('image').value" alt="Preview" class="w-24 h-24 object-cover rounded">
+                      </div> -->
+                    </div>
 
                 </div>
   

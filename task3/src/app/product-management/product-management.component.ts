@@ -30,7 +30,7 @@ export class ProductManagementComponent implements OnInit {
       description: ['',Validators.required],
       price: ['', Validators.required],
       category: ['', Validators.required],
-      image: ['', Validators.required]
+      image: ['']
     });
   }
 
@@ -49,12 +49,6 @@ export class ProductManagementComponent implements OnInit {
    
   isInvalid(){
     if(this.userForm.invalid){
-      console.log("Invalid")
-      console.log("title" , this.userForm.value.title)
-      console.log("desc" , this.userForm.value.description)
-      console.log("price" , this.userForm.value.price)
-      console.log("category" , this.userForm.value.category)
-      console.log("UserFORM" , this.userForm)
       return true
     }
     else{
@@ -113,7 +107,7 @@ export class ProductManagementComponent implements OnInit {
         description: this.userForm.value.description,
         price: this.userForm.value.price,
         category: this.userForm.value.category,
-        
+        image: this.userForm.value.image
       };
 
       this.RequestService.updateProduct(this.selectedID,params).subscribe(
@@ -143,7 +137,7 @@ export class ProductManagementComponent implements OnInit {
         description: this.userForm.value.description,
         price: this.userForm.value.price,
         category: this.userForm.value.category,
-        
+        image: this.userForm.value.image
       }
 
       this.RequestService.createProduct(params).subscribe(response => {
@@ -180,7 +174,8 @@ export class ProductManagementComponent implements OnInit {
   
     reader.onloadend = () => {
       const base64String = reader.result as string;
-      this.userForm.patchValue({ image: base64String }); //assigning the imgSrc to the converted value
+      console.log(base64String)
+      this.userForm.patchValue({ image: base64String }); 
     };
   
     // Start reading the file
