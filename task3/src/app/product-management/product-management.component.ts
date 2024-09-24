@@ -9,7 +9,7 @@ import {Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
   styleUrls: ['./product-management.component.css']
 })
 export class ProductManagementComponent implements OnInit {
-
+  //Defining the variables required
   categories: any[] = [];
   products:any[] =[];
   isModalOpen=false;
@@ -20,9 +20,10 @@ export class ProductManagementComponent implements OnInit {
   deletedID=null;
   first_category;
  
-
+  //Constructor uses Request Service and Form Builder
   constructor(private RequestService: RequestAPIService, private fb: FormBuilder) { }
 
+  //On opening the application we load the following
   ngOnInit(): void {
     this.loadCategories();
     this.userForm = this.fb.group({
@@ -34,6 +35,7 @@ export class ProductManagementComponent implements OnInit {
     });
   }
 
+  //Showing the categories as well as electronics
   loadCategories(){
     this.RequestService.getCategories().subscribe(res => {
       this.categories = res;
@@ -46,7 +48,7 @@ export class ProductManagementComponent implements OnInit {
     });
   }
 
-   
+  //Checking if file is invalid
   isInvalid(){
     if(this.userForm.invalid){
       return true
@@ -56,6 +58,7 @@ export class ProductManagementComponent implements OnInit {
     }
   }
 
+  //Showing the available categories
   showProducts(category){
     console.log(category)
     this.RequestService.getProducts(category).subscribe(res => {
@@ -64,6 +67,7 @@ export class ProductManagementComponent implements OnInit {
     });
   }
 
+  //Showing the Add modal 
   showAddModal(){
     this.isModalOpen=true;
     this.isEditing=false;
@@ -71,6 +75,7 @@ export class ProductManagementComponent implements OnInit {
     this.userForm.reset();
   }
 
+  //Showing the Edit modal and assigning states
   showEditModal(data){
     console.log(data)
     this.isModalOpen=true;
@@ -86,20 +91,20 @@ export class ProductManagementComponent implements OnInit {
     })
   }
 
+  //Showing the Delete modal to get confirmation
   ShowDeleteModal(id){
-    // console.log(id);
-    console.log("trying to show the delete modal")
     this.isModalOpenDelete = true;
     this.deletedID = id;
-    // this.confirmDelete(id);
   }
 
+  //Closing the modals
   closeModal(){
     this.isModalOpen=false;
     this.userForm.reset();
     this.selectedID=null;
   }
 
+  //Editing the Product
   editProduct(){
     if(this.selectedID && this.userForm.valid){
       let params = {
@@ -128,10 +133,9 @@ export class ProductManagementComponent implements OnInit {
     }
   }
 
+  //Adding the Product
   addProduct(){
-    console.log("HERE")
     if(this.userForm.valid){
-      console.log("validated")
       let params = {
         title: this.userForm.value.title,
         description: this.userForm.value.description,
@@ -153,8 +157,8 @@ export class ProductManagementComponent implements OnInit {
     }
   }
 
+  //Deleting the product when confirmed
   confirmDelete(){
-    console.log("Here", this.deletedID)
     this.isModalOpenDelete=false;
     this.RequestService.deleteProduct(this.deletedID).subscribe(response => {
       // Filter out the user with the matching userID
@@ -163,23 +167,37 @@ export class ProductManagementComponent implements OnInit {
     });
   }
 
+  //Cancelling the delete operation
   cancelDelete(){
     this.isModalOpenDelete = false;
   }
 
   //Converting to string from base64 to render image
   onFileChange(event: any) {
+   
     const file = event.target.files[0];
-    const reader = new FileReader();
+    const maxSizeInMB =.15;
+    const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
+    console.log("File size" , file.size)
+    if(file && file.size <= maxSizeInBytes){
+      const reader = new FileReader();
   
-    reader.onloadend = () => {
-      const base64String = reader.result as string;
-      console.log(base64String)
-      this.userForm.patchValue({ image: base64String }); 
-    };
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        console.log(base64String)
+        this.userForm.patchValue({ image: base64String }); 
+      };
+    
   
     // Start reading the file
     reader.readAsDataURL(file);
+    }
+    else if(file && file.size > maxSizeInBytes){
+      console.log(`File size is too large`)
+      event.target.value ='';
+    }
+
+
   }
 
 }
