@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RequestAPIService } from '../request-api.service';
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
-
+import Swal from 'sweetalert2/dist/sweetalert2.js'
 
 @Component({
   selector: 'app-product-management',
@@ -25,6 +25,7 @@ export class ProductManagementComponent implements OnInit {
   totalPages: number = 1;
   currentPage: number = 1;
   productsPerPage: number = 5;
+  maxImageSize = 60000;
 
   //Constructor uses Request Service and Form Builder
   constructor(private RequestService: RequestAPIService, private fb: FormBuilder) { }
@@ -207,35 +208,31 @@ export class ProductManagementComponent implements OnInit {
 
   //Converting to string from base64 to render image
   onFileChange(event: any) {
-   
     const file = event.target.files[0];
-    const maxSizeInMB =.15;
-    const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
-    console.log("File size" , file.size)
-    if(file && file.size <= maxSizeInBytes){
-      const reader = new FileReader();
-  
+    const reader = new FileReader();
+    if(this.fileSizeChecker){
       reader.onloadend = () => {
         const base64String = reader.result as string;
-        console.log(base64String)
-        this.userForm.patchValue({ image: base64String }); 
+        this.userForm.patchValue({ image: base64String }); //assigning the imgSrc to the converted value
       };
     
-  
-    // Start reading the file
-    reader.readAsDataURL(file);
+      // Start reading the file
+      reader.readAsDataURL(file);
     }
-
-    error => {
-      console.error('Image error', error)
-      alert('An error occurred while creating the product. Please try again.');
-    }
-    // else if(file && file.size > maxSizeInBytes){
-    //   console.log(`File size is too large`)
-    //   event.target.value ='';
-    // }
-
-
   }
 
+  fileSizeChecker(file){
+    if(file.size < this.maxImageSize){
+      return true;
+    }
+    else{
+      Swal.fire({
+        title: 'Error!',
+        text: 'Image size is too big',
+        icon: 'error',
+        confirmButtonText: 'Try again'
+      })
+    }
+  }
+ 
 }

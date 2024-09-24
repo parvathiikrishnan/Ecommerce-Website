@@ -100,10 +100,16 @@
                     </div>
 
                     <div class="col-span-2">
-                        <label class="block mb-2 text-sm font-medium text-gray-900">Price</label>
-                        <input formControlName="price" id="price" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500">
-                        <div *ngIf="userForm.get('price').invalid && userForm.get('price').touched" class="text-red-500">Price is required.</div>                  
-                    </div>
+                      <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Price</label>
+                      <input 
+                          formControlName="price" 
+                          id="price" 
+                          type="number" 
+                          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                          min="0" step="any"> <!-- Optional: 'min' ensures no negative values, and 'step' allows decimal numbers -->
+                          <div *ngIf="userForm.get('price').invalid && userForm.get('price').touched" class="text-red-500">Price is required.</div>
+                                      
+                  </div>
 
                     <div class="col-span-2">
                         <label class="block mb-2 text-sm font-medium text-gray-900">Category</label>
@@ -113,7 +119,7 @@
 
                     <div class="col-span-2">
                       <label for="image" class="block mb-2 text-sm font-medium text-gray-900">Upload Image</label>
-                      <input type="file" (change)="onFileChange($event)" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
+                      <input type="file"  (change)="onFileChange($event)" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none">
                       
                     </div>
 
