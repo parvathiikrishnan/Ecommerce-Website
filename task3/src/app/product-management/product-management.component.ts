@@ -8,6 +8,7 @@ import {Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
   templateUrl: './product-management.component.html',
   styleUrls: ['./product-management.component.css']
 })
+
 export class ProductManagementComponent implements OnInit {
   //Defining the variables required
   categories: any[] = [];
