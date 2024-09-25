@@ -1,45 +1,27 @@
-# E-Commerce Website
+# Task3
 
-An eCommerce platform built using **Angular** and styled with **Tailwind CSS**. The website utilizes the **Fake Store API** to fetch product details, user information, and categories.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.4.
 
-## Features
+## Development server
 
-- Fetches and displays a list of categories from Fake Store API.
-- Shows products available in each category using Fake Store API
-- View detailed product information and enables Adding, Editing and Deleting users.
-- User authentication (mocked using the Fake Store API).
-- Responsive design with Tailwind CSS.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+## Code scaffolding
 
-## Technologies Used
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-- **Angular**: Frontend framework for building the user interface.
-- **Tailwind CSS**: Utility-first CSS framework for fast UI design.
-- **Fake Store API**: Provides fake product, user, and category data.
-  
-## Prerequisites
+## Build
 
-To run this project locally, you need to have the following installed:
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-- [Node.js](https://nodejs.org/) (v14.x or later)
-- [Angular CLI](https://angular.io/cli)
-  
-## Installation
+## Running unit tests
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/ecommerce-angular-tailwind.git
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-2. Navigate to the task3 folder
-   ```bash
-   cd task3
-3. Install dependencies
-   ```bash
-   npm install
-4. Run the app
-   ```bash
-   ng serve
-5. Open your browser and go to:
-   ```bash
-   (http://localhost:4200)
-   
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
