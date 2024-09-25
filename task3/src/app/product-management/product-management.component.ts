@@ -15,7 +15,7 @@ export class ProductManagementComponent implements OnInit {
   products:any[] =[];
   isModalOpen=false;
   isModalOpenDelete=false
-  userForm:FormGroup;
+  productForm:FormGroup;
   isEditing=false;
   selectedID=null;
   deletedID=null;
@@ -34,7 +34,7 @@ export class ProductManagementComponent implements OnInit {
   //On opening the application we load the following
   ngOnInit(): void {
     this.loadCategories();
-    this.userForm = this.fb.group({
+    this.productForm = this.fb.group({
       title: ['',Validators.required],
       description: ['',Validators.required],
       price: ['', Validators.required],
@@ -55,7 +55,7 @@ export class ProductManagementComponent implements OnInit {
 
   //Checking if file is invalid
   isInvalid(){
-    if(this.userForm.invalid){
+    if(this.productForm.invalid){
       return true
     }
     else{
@@ -113,7 +113,7 @@ export class ProductManagementComponent implements OnInit {
     this.isModalOpen=true;
     this.isEditing=false;
     this.selectedID=null;
-    this.userForm.reset();
+    this.productForm.reset();
   }
 
   //Showing the Edit modal and assigning states
@@ -123,7 +123,7 @@ export class ProductManagementComponent implements OnInit {
     this.isEditing=true;
     this.selectedID = data.id;
     console.log("selected id", this.selectedID)
-    this.userForm.patchValue({
+    this.productForm.patchValue({
       title: data.title,
       description: data.description,
       price: data.price,
@@ -141,19 +141,19 @@ export class ProductManagementComponent implements OnInit {
   //Closing the modals
   closeModal(){
     this.isModalOpen=false;
-    this.userForm.reset();
+    this.productForm.reset();
     this.selectedID=null;
   }
 
   //Editing the Product
   editProduct(){
-    if(this.selectedID && this.userForm.valid){
+    if(this.selectedID && this.productForm.valid){
       let params = {
-        title: this.userForm.value.title,
-        description: this.userForm.value.description,
-        price: this.userForm.value.price,
-        category: this.userForm.value.category,
-        image: this.userForm.value.image
+        title: this.productForm.value.title,
+        description: this.productForm.value.description,
+        price: this.productForm.value.price,
+        category: this.productForm.value.category,
+        image: this.productForm.value.image
       };
 
       this.RequestService.updateProduct(this.selectedID,params).subscribe(
@@ -161,7 +161,7 @@ export class ProductManagementComponent implements OnInit {
           const index = this.products.findIndex(user => user.id === this.selectedID);
           if (index !== -1) {
             this.paginatedProducts[index] = { ...response }; // Update user in the list
-            this.userForm.reset(); // Reset the form
+            this.productForm.reset(); // Reset the form
             this.selectedID = null;
             this.isModalOpen=false
           }
@@ -176,13 +176,13 @@ export class ProductManagementComponent implements OnInit {
 
   //Adding the Product
   addProduct(){
-    if(this.userForm.valid){
+    if(this.productForm.valid){
       let params = {
-        title: this.userForm.value.title,
-        description: this.userForm.value.description,
-        price: this.userForm.value.price,
-        category: this.userForm.value.category,
-        image: this.userForm.value.image
+        title: this.productForm.value.title,
+        description: this.productForm.value.description,
+        price: this.productForm.value.price,
+        category: this.productForm.value.category,
+        image: this.productForm.value.image
       }
 
       this.RequestService.createProduct(params).subscribe(response => {
@@ -238,7 +238,7 @@ export class ProductManagementComponent implements OnInit {
       console.log("Valid size")
       reader.onloadend = () => {
         const base64String = reader.result as string;
-        this.userForm.patchValue({ image: base64String }); //assigning the imgSrc to the converted value
+        this.productForm.patchValue({ image: base64String }); //assigning the imgSrc to the converted value
       };
     
       // Start reading the file
@@ -246,7 +246,7 @@ export class ProductManagementComponent implements OnInit {
     }
 
     else{
-      this.userForm.get('image').reset();
+      this.productForm.get('image').reset();
     }
   }
 
@@ -262,7 +262,7 @@ export class ProductManagementComponent implements OnInit {
       this.toobig=true
       console.log("Invalid size")
       
-      console.log(this.userForm.value.image)
+      console.log(this.productForm.value.image)
       Swal.fire({
         tietle: 'Error!',
         text: 'Image size is too big',
