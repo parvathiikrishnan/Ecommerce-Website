@@ -160,7 +160,7 @@ export class ProductManagementComponent implements OnInit {
         (response) => {
           const index = this.products.findIndex(user => user.id === this.selectedID);
           if (index !== -1) {
-            this.products[index] = { ...response }; // Update user in the list
+            this.paginatedProducts[index] = { ...response }; // Update user in the list
             this.userForm.reset(); // Reset the form
             this.selectedID = null;
             this.isModalOpen=false
