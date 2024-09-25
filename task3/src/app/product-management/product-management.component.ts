@@ -80,6 +80,7 @@ export class ProductManagementComponent implements OnInit {
       this.loading = false; });
   }
 
+  //Updates Pagination
   updatePagination() {
     this.totalPages = Math.ceil(this.products.length / this.productsPerPage);
     this.paginatedProducts = this.products.slice(
@@ -89,8 +90,9 @@ export class ProductManagementComponent implements OnInit {
     console.log(`Current Page: ${this.currentPage}, Total Pages: ${this.totalPages}`);
     console.log('Paginated Products:', this.paginatedProducts);
     
-}
+  }
 
+  //Calculates for next page
   nextPage() {
       if (this.currentPage < this.totalPages) {
           this.currentPage++;
@@ -98,15 +100,13 @@ export class ProductManagementComponent implements OnInit {
       }
   }
 
+  //Calculates for previous page
   previousPage() {
       if (this.currentPage > 1) {
           this.currentPage--;
           this.updatePagination();
       }
   }
-
-
-
 
   //Showing the Add modal 
   showAddModal(){
@@ -271,5 +271,4 @@ export class ProductManagementComponent implements OnInit {
       }) 
     }
   }
- 
 }
