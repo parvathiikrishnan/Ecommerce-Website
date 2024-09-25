@@ -58,13 +58,13 @@
   <div class="flex justify-center space-x-2 mt-4">
     <button (click)="previousPage()" 
             [disabled]="currentPage === 1" 
-            class="px-3 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 disabled:opacity-50">
+            class="items-center px-6 py-2 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
       Previous
     </button>
     <span class="px-4 py-2">{{ currentPage }} / {{ totalPages }}</span>
     <button (click)="nextPage()" 
             [disabled]="currentPage === totalPages" 
-            class="px-3 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 disabled:opacity-50">
+            class="items-center px-6 py-2 text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
       Next
     </button>
   </div>
