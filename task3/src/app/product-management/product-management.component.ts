@@ -199,12 +199,24 @@ export class ProductManagementComponent implements OnInit {
   }
 
   //Deleting the product when confirmed
-  confirmDelete(){
-    this.isModalOpenDelete=false;
+  confirmDelete() {
+    this.isModalOpenDelete = false;
     this.RequestService.deleteProduct(this.deletedID).subscribe(response => {
-      // Filter out the user with the matching userID
-      this.products = this.products.filter(user => user.id !== this.deletedID);
-      console.log('User deleted:', response);
+      // Remove the deleted product from the products array
+      this.products = this.products.filter(product => product.id !== this.deletedID);
+      
+      // Recalculate pagination after deletion
+      this.totalPages = Math.ceil(this.products.length / this.productsPerPage);
+  
+      // If the current page is empty after deletion, go back to the previous page
+      if (this.paginatedProducts.length === 1 && this.currentPage > 1) {
+        this.currentPage--;
+      }
+  
+      // Update paginated products after adjusting the page
+      this.updatePagination();
+      
+      console.log('Product deleted:', response);
     });
   }
 
