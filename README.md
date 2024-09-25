@@ -32,7 +32,7 @@ To run this project locally, you need to have the following installed:
 
 2. Navigate to the task3 folder
    ```bash
-   cd ecommerce-angular-tailwind
+   cd task3
 3. Install dependencies
    ```bash
    npm install
