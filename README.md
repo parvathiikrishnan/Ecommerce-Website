@@ -1,4 +1,4 @@
-# Task3
+# E-Commerce Website
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.4.
 
@@ -6,7 +6,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-# E-Commerce Website
 An eCommerce platform built using **Angular** and styled with **Tailwind CSS**. The website utilizes the **Fake Store API** to fetch product details, user information, and categories.
 
 ## Features
