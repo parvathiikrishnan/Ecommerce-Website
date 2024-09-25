@@ -192,7 +192,12 @@ export class ProductManagementComponent implements OnInit {
 
       error => {
         console.error('Error creating product:', error)
-        alert('An error occurred while creating the product. Please try again.');
+        Swal.fire({
+          tietle: 'Error!',
+          text: 'An error occurred while creating the product. Please try again.',
+          icon: 'error',
+          confirmButtonText: 'Try again'
+        }) 
       }
       this.isModalOpen=false
     }
@@ -264,8 +269,6 @@ export class ProductManagementComponent implements OnInit {
         icon: 'error',
         confirmButtonText: 'Try again'
       }) 
-
-
     }
   }
  
