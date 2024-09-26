@@ -21,9 +21,9 @@ An eCommerce platform built using **Angular** and styled with **Tailwind CSS**. 
 - **Fake Store API**: Provides fake product, user, and category data.
 
 ## User Roles
-- **Admin** : Has the functionality to Add and Delete products (can be tested with user johnd)
-- **Editor** : Has the functionality to Edit products (can be tested with user mor_2314)
-- **User** : Has the functionality to View products
+- **Admin** : Has the functionality to Add and Delete products (can be tested with username: johnd , password: m38rmF$)
+- **Editor** : Has the functionality to Edit products (can be tested with username: mor_2314 , password: 83r5^_)
+- **User** : Cannot go to the admin page and gets an error message
   
 ## Further help
 
