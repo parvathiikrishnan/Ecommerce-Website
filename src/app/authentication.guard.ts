@@ -11,11 +11,10 @@ export class AuthenticationGuard implements CanActivate {
 
   constructor(private router: Router, private permission: PermissionService){}
   canActivate(): boolean{
-    //get the permission service hasRole function
+    //Get the permission service hasRole function
     if(this.permission.hasRole('admin')){
       return true;
     }
-
     else if(this.permission.hasRole('editor')){
       return true;
     }

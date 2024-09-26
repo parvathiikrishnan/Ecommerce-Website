@@ -9,7 +9,7 @@ export class RequestAPIService {
   private apiurl = "https://fakestoreapi.com";
   constructor(private http: HttpClient) { }
 
-
+  
   createToken(data):Observable<any>{
     return this.http.post<any>(`${this.apiurl}/auth/login`, data);
   }

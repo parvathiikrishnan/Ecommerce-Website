@@ -24,24 +24,22 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  //Function to Login user, assign Role to the local storage and route to the page
   onLogin(){
-    console.log("called ")
+    if(this.userForm.valid){
+      let params = {
+        username: this.userForm.value.username,
+        password: this.userForm.value.password
+      }
   
+      this.RequestService.createToken(params).subscribe(response => {
+        console.log("Received this : ", response);
+        localStorage.setItem('username',this.userForm.value.username)
+        this.permission.RoleAssigner();
+        this.router.navigate(['product']);
 
-      if(this.userForm.valid){
-        let params = {
-          username: this.userForm.value.username,
-          password: this.userForm.value.password
-        }
-    
-        this.RequestService.createToken(params).subscribe(response => {
-          console.log("Received this : ", response);
-          localStorage.setItem('username',this.userForm.value.username)
-          this.permission.Adminlogin();
-          this.router.navigate(['product']);
-  
-          
-        },
+        
+      },
         (error) => {
           console.error('Error logging in:', error)
           
@@ -51,14 +49,9 @@ export class LoginComponent implements OnInit {
             icon: 'error',
             confirmButtonText: 'Try again'
           })
-  
           this.userForm.reset()
         }
       );
-
-      }
+    }
   }
-
-  
-
 }
