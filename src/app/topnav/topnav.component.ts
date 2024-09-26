@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./topnav.component.css']
 })
 export class TopnavComponent implements OnInit {
-
+  isMenuOpen: boolean = false;
   isLoggedin=false;
   constructor( private router: Router ,private permission: PermissionService) { }
 
@@ -19,5 +19,9 @@ export class TopnavComponent implements OnInit {
   onLogOut(){
     this.isLoggedin = true;
     this.permission.onLogout();
+  }
+
+  toggleMenu(){
+    this.isMenuOpen = !this.isMenuOpen;
   }
 }

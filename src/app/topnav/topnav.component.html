@@ -1,74 +1,63 @@
 <!-- Main navigation container -->
-<nav
-  class="relative flex w-full flex-wrap items-center justify-between bg-black py-2 shadow-dark-mild lg:py-4"
-  data-twe-navbar-ref>
+<nav class="relative flex w-full flex-wrap items-center justify-between bg-black py-2 shadow-dark-mild lg:py-4">
   <div class="flex w-full flex-wrap items-center justify-between px-3">
     <div>
       <a class="mx-2 my-1 flex items-center lg:mb-0 lg:mt-0">
-        <img
-          class="me-2 h-10"
-          src="/assets/images/logo-white.png"
-          
-          alt="TE Logo"
-          loading="lazy" />
+        <img class="me-2 h-10" src="/assets/images/logo-white.png" alt="TE Logo" loading="lazy" />
       </a>
     </div>
 
-    <!-- Hamburger button for mobile view -->
-    <button
-      class="block border-0 bg-transparent px-2 text-black/50 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0  lg:hidden"
-      type="button"
-      data-twe-collapse-init
-      data-twe-target="#navbarSupportedContent4"
-      aria-controls="navbarSupportedContent4"
-      aria-expanded="false"
-      aria-label="Toggle navigation">
-      <!-- Hamburger icon -->
-      <span
-        class="[&>svg]:w-7 [&>svg]:stroke-black/50 dark:[&>svg]:stroke-neutral-200">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor">
-          <path
-            fill-rule="evenodd"
-            d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
-            clip-rule="evenodd" />
-        </svg>
-      </span>
-    </button>
+    <!-- Hamburger button for mobile screens -->
+    <div class="lg:hidden">
+      <input type="checkbox" id="menu-toggle" class="hidden peer" />
+      <button (click)="toggleMenu()" for="menu-toggle" class="cursor-pointer block">
+
+        <!-- Hamburger icon (3 lines) with smooth transition -->
+        <div class="space-y-1 transition duration-300 ease-in-out">
+          <span class="block w-6 h-0.5 bg-white"></span>
+          <span class="block w-6 h-0.5 bg-white"></span>
+          <span class="block w-6 h-0.5 bg-white"></span>
+        </div>
+      </button>
+    </div>
+
+      <!-- Collapsible navbar container -->
+    <div [ngClass]="{'hidden': !isMenuOpen, 'flex': isMenuOpen}" class="absolute top-full left-0 right-0 text-white bg-gradient-to-br from-purple-600 to-blue-500 flex-col p-4 lg:flex lg:static lg:flex-row lg:bg-transparent lg:p-0">
+      <ul class="list-style-none flex flex-col ps-0 lg:flex-row lg:mt-0">
+        <li class="my-4 ps-2 lg:my-0 lg:pe-1 lg:ps-2">
+          <a class="text-white transition duration-200 hover:text-cyan-500" href="/product">Dashboard</a>
+        </li>
+        <li class="my-4 ps-2 lg:my-0 lg:pe-1 lg:ps-2">
+          <a class="text-white" (click)="onLogOut()" href="#" >Log Out</a>
+        </li>
+      </ul>
+    </div>
 
     <!-- Collapsible navbar container -->
     <div
-      class="!visible mt-2 hidden flex-grow basis-[100%] items-center lg:mt-0 lg:!flex lg:basis-auto"
+      class="peer-checked:flex hidden flex-grow basis-[100%] items-center lg:mt-0 lg:flex lg:basis-auto"
       id="navbarSupportedContent4"
-      data-twe-collapse-item>
+    >
       <!-- Left links -->
-      <ul
-        class="list-style-none me-auto flex flex-col ps-0 lg:mt-1 lg:flex-row"
-        data-twe-navbar-nav-ref>
-        <!-- Home link -->
-        <li
-          
-          class="my-4 ps-2 lg:my-0 lg:pe-1 lg:ps-2"
-          data-twe-nav-item-ref>
+      <ul class="list-style-none me-auto flex flex-col ps-0 lg:mt-1 lg:flex-row">
+        <!-- Dashboard link -->
+        <li class="my-4 ps-2 lg:my-0 lg:pe-1 lg:ps-2">
           <a
             class="text-white transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none lg:px-2"
-            aria-current="page"
             href="/product"
-            data-twe-nav-link-ref
             >Dashboard</a
           >
         </li>
       </ul>
 
+      <!-- Log Out link -->
       <div class="flex items-center">
         <a
           href="#"
           (click)="onLogOut()"
-          class="text-white me-3 inline-block rounded px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary hover:text-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700">
-          Log Out
-        </a>
+          class="text-white me-3 inline-block rounded px-2 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-primary hover:text-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 sm:text-sm sm:text-white sm:px-3 md:text-base md:px-4"
+          >Log Out</a
+        >
       </div>
     </div>
   </div>
