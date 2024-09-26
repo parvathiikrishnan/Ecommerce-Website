@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PermissionService {
   private loggedInUser: { username: string; role: string } | null = null;
-  constructor() { }
+  constructor(private router: Router,) { }
   
   //Assigning roles to users
   RoleAssigner() {
@@ -29,6 +30,9 @@ export class PermissionService {
   hasRole(role): boolean{
     const storredRole = localStorage.getItem('role')
     return storredRole === role;
-    
+  }
+
+  onLogout(){
+    localStorage.clear();
   }
 }
