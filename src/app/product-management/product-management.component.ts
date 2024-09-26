@@ -247,7 +247,8 @@ export class ProductManagementComponent implements OnInit {
     }
 
     else{
-      this.productForm.get('image').reset();
+      // this.productForm.get('image').reset();
+      event.target.value= null;
     }
   }
 
