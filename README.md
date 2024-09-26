@@ -20,6 +20,11 @@ An eCommerce platform built using **Angular** and styled with **Tailwind CSS**. 
 - **Tailwind CSS**: Utility-first CSS framework for fast UI design.
 - **Fake Store API**: Provides fake product, user, and category data.
 
+## User Roles
+- **Admin** : Has the functionality to Add and Delete products (can be tested with user johnd)
+- **Editor** : Has the functionality to Edit products (can be tested with user mor_2314)
+- **User** : Has the functionality to View products
+  
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
