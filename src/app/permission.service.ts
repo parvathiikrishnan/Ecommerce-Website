@@ -6,21 +6,34 @@ import { Injectable } from '@angular/core';
 export class PermissionService {
   private loggedInUser: { username: string; role: string } | null = null;
   constructor() { }
-
-  Adminlogin(username: string, password: string): boolean {
-    if (username === 'johnd' && password === 'admin123') {
+  
+  //checking the role of a username
+  Adminlogin() {
+    const username = localStorage.getItem('username')
+    if (username === 'johnd') {
       this.loggedInUser = { username: 'johnd', role: 'admin' };
-      return true;
+      
+    } 
+    
+    else if (username === 'mor_2314') {
+      this.loggedInUser = { username: 'mor_2314', role: 'editor' };
+      
     } 
     
     else{
       this.loggedInUser = { username, role: 'user' };
-      return false;
+      
     }
+    localStorage.setItem('role',this.loggedInUser.role )
     
   }
 
-  getUserRole(): string | null {
-    return this.loggedInUser ? this.loggedInUser.role : null;
+ 
+  
+  //get role
+  hasRole(role): boolean{
+    const storredRole = localStorage.getItem('role')
+    return storredRole === role;
+    
   }
 }

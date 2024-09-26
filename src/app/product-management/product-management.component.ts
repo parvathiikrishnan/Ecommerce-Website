@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RequestAPIService } from '../request-api.service';
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 import Swal from 'sweetalert2/dist/sweetalert2.js'
+import { PermissionService } from '../permission.service';
 
 @Component({
   selector: 'app-product-management',
@@ -29,7 +30,7 @@ export class ProductManagementComponent implements OnInit {
   toobig=false;
 
   //Constructor uses Request Service and Form Builder
-  constructor(private RequestService: RequestAPIService, private fb: FormBuilder) { }
+  constructor(private RequestService: RequestAPIService, private fb: FormBuilder, public permission: PermissionService) { }
 
   //On opening the application we load the following
   ngOnInit(): void {

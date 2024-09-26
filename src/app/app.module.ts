@@ -9,6 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 import { ProductManagementComponent } from './product-management/product-management.component';
 import { HttpClientModule } from  '@angular/common/http';
 import { SignupComponent } from './signup/signup.component';
+import { UnauthorizedLoginComponent } from './unauthorized-login/unauthorized-login.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SignupComponent } from './signup/signup.component';
     TopnavComponent,
     FooterComponent,
     ProductManagementComponent,
-    SignupComponent
+    SignupComponent,
+    UnauthorizedLoginComponent
   ],
   imports: [
     BrowserModule,

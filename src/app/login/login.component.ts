@@ -3,6 +3,7 @@ import { Router } from '@angular/router'; // Import Router
 import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 import { RequestAPIService } from '../request-api.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js' //do npm install first and include cdn in index.html
+import { PermissionService } from '../permission.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   username: string = ""
   password: string = ""
   
-  constructor(private router: Router, private fb: FormBuilder, private RequestService: RequestAPIService,) { }
+  constructor(private router: Router, private fb: FormBuilder, private RequestService: RequestAPIService,private permission: PermissionService) { }
 
   ngOnInit(): void {
     this.userForm = this.fb.group({
@@ -35,6 +36,8 @@ export class LoginComponent implements OnInit {
     
         this.RequestService.createToken(params).subscribe(response => {
           console.log("Received this : ", response);
+          localStorage.setItem('username',this.userForm.value.username)
+          this.permission.Adminlogin();
           this.router.navigate(['product']);
   
           
@@ -55,5 +58,7 @@ export class LoginComponent implements OnInit {
 
       }
   }
+
+  
 
 }
