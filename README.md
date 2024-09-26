@@ -24,7 +24,20 @@ An eCommerce platform built using **Angular** and styled with **Tailwind CSS**. 
 - **Admin** : Has the functionality to Add and Delete products (can be tested with username: johnd , password: m38rmF$)
 - **Editor** : Has the functionality to Edit products (can be tested with username: mor_2314 , password: 83r5^_)
 - **User** : Cannot go to the admin page and gets an error message
-  
+
+The Login can be tested with the following users from FakeStore API (https://fakestoreapi.com/docs)
+
+- username: 'johnd', password: 'm38rmF$'
+- username: 'mor_2314', password: '83r5^_'
+- username: 'kevinryan', password: 'kev02937@'
+- username: 'donero', password: 'ewedon'
+- username: 'derek', password: 'jklg*_56'
+- username: 'david_r', password: '3478*#54'
+- username: 'snyder', password: 'f238&@*$'
+- username: 'hopkins', password: 'William56$hj'
+- username: 'kate_h', password: 'kfejk@*_'
+- username: 'jimmie_k', password: 'klein*#%*'
+
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
